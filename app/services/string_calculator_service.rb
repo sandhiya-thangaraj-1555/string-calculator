@@ -11,9 +11,6 @@ class StringCalculatorService
     end
 
     number_array = @input_string.split(",")
-    if number_array.length > 2
-      raise ArgumentError, "Up to two numbers only are allowed"
-    end
 
     sum = 0
     number_array.each do |number_str|
