@@ -6,20 +6,10 @@ class StringCalculatorService
   end
 
   def add_numbers_from_string
-    if @input_string.nil? || @input_string.empty?
-      return 0
-    end
+    return 0 if @input_string.empty?
 
-    number_array = @input_string.split(",")
+    number_array = @input_string.split(/,|\n/) # Split by comma or newline
 
-    sum = 0
-    number_array.each do |number_str|
-      if number_str.nil? || number_str.empty?
-        next
-      end
-      number = Integer(number_str) # handles non-integer input
-      sum += number
-    end
-    sum
+    number_array.map { |num| num.to_i.zero? ? 0 : num.to_i }.sum
   end
 end
