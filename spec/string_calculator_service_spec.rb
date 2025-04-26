@@ -49,5 +49,10 @@ RSpec.describe StringCalculatorService do
       calculator = StringCalculatorService.new("-1,2,-3")
       expect { calculator.add_numbers_from_string }.to raise_error(ArgumentError, "Negative not allowed: -1, -3")
     end
+
+    it 'should ignore numbers greater than 1000' do
+      calculator = StringCalculatorService.new("2,1000,;;;text,1001")
+      expect(calculator.add_numbers_from_string).to eq(1002)
+    end
   end
 end

@@ -13,6 +13,8 @@ class StringCalculatorService
     negative_numbers = number_array.select { |n| n.to_i < 0 }
     raise ArgumentError, "Negative not allowed: #{negative_numbers.join(', ')}" if negative_numbers.any?
 
+    number_array.reject! { |n| n.to_i > 1000 } # Ignore numbers greater than 1000
+
     number_array.map { |num| num.to_i.zero? ? 0 : num.to_i }.sum
   end
 end
