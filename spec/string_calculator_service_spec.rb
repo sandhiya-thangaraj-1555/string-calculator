@@ -1,5 +1,5 @@
-# spec/services/string_calculator_service_spec.rb
-require 'rails_helper' # or spec_helper, depending on your setup
+require 'rails_helper'
+
 RSpec.describe StringCalculatorService do
 
   describe '#add' do
@@ -41,6 +41,13 @@ RSpec.describe StringCalculatorService do
     it 'should handle a custom delimiter and the default delimiters' do
       calculator = StringCalculatorService.new("//@\n1@2;,3\n4")
       expect(calculator.add_numbers_from_string).to eq(10)
+    end
+
+    it 'should raise an error if any negative numbers are given' do
+      calculator = StringCalculatorService.new("-1,2")
+      expect { calculator.add_numbers_from_string }.to raise_error(ArgumentError, "Negative not allowed: -1")
+      calculator = StringCalculatorService.new("-1,2,-3")
+      expect { calculator.add_numbers_from_string }.to raise_error(ArgumentError, "Negative not allowed: -1, -3")
     end
   end
 end
