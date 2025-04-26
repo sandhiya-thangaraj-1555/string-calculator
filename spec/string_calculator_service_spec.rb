@@ -27,5 +27,20 @@ RSpec.describe StringCalculatorService do
       calculator = StringCalculatorService.new("1\n2,3")
       expect(calculator.add_numbers_from_string).to eq(6)
     end
+
+    it 'should handle a custom delimiter' do
+      calculator = StringCalculatorService.new("//;\n1;2")
+      expect(calculator.add_numbers_from_string).to eq(3)
+    end
+
+    it 'should handle a custom delimiter with newlines' do
+      calculator = StringCalculatorService.new("//;\n1;2\n3")
+      expect(calculator.add_numbers_from_string).to eq(6)
+    end
+
+    it 'should handle a custom delimiter and the default delimiters' do
+      calculator = StringCalculatorService.new("//@\n1@2;,3\n4")
+      expect(calculator.add_numbers_from_string).to eq(10)
+    end
   end
 end
